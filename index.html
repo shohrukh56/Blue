@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Selector</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="mood-selection">
+  <h2>How are you feeling today?</h2>
+  <div class="emojis">
+    <button class="emoji" data-mood="happy">😊</button>
+    <button class="emoji" data-mood="sad">😢</button>
+    <button class="emoji" data-mood="anxious">😰</button>
+    <button class="emoji" data-mood="neutral">😐</button>
+  </div>
+</div>
+
+<div id="popup" class="popup hidden">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <p id="suggestionText"></p>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
