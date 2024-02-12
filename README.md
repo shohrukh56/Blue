@@ -1,2 +1,1 @@
-# Mind-Bloom-LUC
-# Mind-Bloom-LUC
+# Blue luc comp 424 spring 2024
