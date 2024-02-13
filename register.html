@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'm Feeling... BLUE</title>
+  <style>
+    /* CSS rules */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      /* Replace with the path to your background image */
+      background: url('/img/water.jpeg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      text-align: center;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    }
+
+    header h1 {
+      color: #0000ff; /* Blue color for the 'I'm Feeling...BLUE' text */
+    }
+
+    .mood-selection {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .emojis button {
+      font-size: 2em; /* Larger emojis */
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .recommendation {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .register-form {
+      width: 300px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .register-form h2 {
+      color: #0000ff; /* Blue color */
+    }
+
+    .register-form input {
+      width: calc(100% - 20px);
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .register-form button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #0000ff; /* Blue color */
+      color: white;
+      cursor: pointer;
+    }
+
+    footer {
+      background: rgba(255, 255, 255, 0.5);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>I'm Feeling...BLUE</h1>
+</header>
+
+<main>
+  <section class="mood-selection">
+    <h2>Select your mood:</h2>
+    <div class="emojis">
+      <!-- Emojis as buttons -->
+      <button class="emoji" data-mood="happy">😊</button>
+      <button class="emoji" data-mood="sad">😢</button>
+      <button class="emoji" data-mood="anxious">😰</button>
+      <button class="emoji" data-mood="neutral">😐</button>
+    </div>
+  </section>
+
+  <section class="recommendation">
+    <p id="recommendationText"></p>
+  </section>
+
+  <section class="register-form">
+    <h2>REGISTER</h2>
+    <form id="registerForm">
+      <input type="text" placeholder="Name" required>
+      <input type="text" placeholder="Last Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <input type="password" placeholder="Confirm Your Password" required>
+      <button type="submit">SIGN UP</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>Copyright © 2024 Blue. All Rights Reserved</p>
+</footer>
+
+<script>
+  // JavaScript for mood selection and recommendation display
+  document.querySelectorAll('.emojis button').forEach(button => {
+    button.addEventListener('click', function() {
+      const mood = this.getAttribute('data-mood');
+      const recommendationText = document.getElementById('recommendationText');
+      let message = '';
+      switch(mood) {
+        case 'happy':
+          message = 'Great to see you happy! Stay positive!';
+          break;
+        case 'sad':
+          message = 'It\'s okay to be sad. Take time to care for yourself.';
+          break;
+        case 'anxious':
+          message = 'Take a moment to relax and breathe. You\'re doing just fine.';
+          break;
+        case 'neutral':
+          message = 'Embrace the calm. A quiet day can be a gift.';
+          break;
+        // Add more cases for additional emojis as needed
+      }
+      recommendationText.textContent = message;
+      document.querySelector('.recommendation').style.display = 'block'; // Show the recommendation
+    });
+  });
+
+  // JavaScript for handling the registration form submission
+  document.getElementById('registerForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // Dummy validation and "registration" logic
+    var name = this.querySelector('input[placeholder="Name"]').value;
+    var lastName = this.querySelector('input[placeholder="Last Name"]').value;
+    var email = this.querySelector('input[placeholder="Email"]').value;
+    var password = this.querySelector('input[placeholder="Password"]').value;
+    var confirmPassword = this.querySelector('input[placeholder="Confirm Your Password"]').value;
+
+    if(password !== confirmPassword) {
+      alert('Passwords do not match. Please try again.');
+      return;
+    }
+
+    // Here you would normally send the data to a server using AJAX
+    console.log('Registering:', name, lastName, email); // This would be removed in a real application
+    alert('Thank you for registering, ' + name + '!');
+
+    // After handling the registration, reset the form
+    this.reset();
+  });
+</script>
+
+
+</body>
+</html>

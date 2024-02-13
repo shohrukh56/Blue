@@ -1,73 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-body, html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: url('/Users/rehonomajahin/Downloads/COMP 324/background.avif') no-repeat center center fixed; 
-  background-size: cover;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login and Mood Selector</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('/Users/rehonomajahin/Downloads/COMP 324/background.avif') no-repeat center center fixed;
+      background-size: cover;
+    }
 
-.login-container {
-  background: rgba(255, 255, 255, 0.9);
-  width: 300px;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0px 0px 10px 0px #000000;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+    .login-container, .mood-selection {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0px 0px 10px 0px #000000;
+      text-align: center;
+      margin-bottom: 20px; /* Space between login and mood selector */
+      width: 300px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -150%); /* Adjust this to position both elements */
+    }
 
-.login-container h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
+    .login-container h2, .mood-selection h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-.login-container input[type='email'],
-.login-container input[type='password'] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-sizing: border-box; /* Add this to include padding in input width */
-}
+    .login-container input[type='email'],
+    .login-container input[type='password'],
+    .login-container input[type='submit'],
+    .emoji {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
 
-.login-container input[type='submit'] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  background-color: #007bff;
-  margin-top: 20px;
-  cursor: pointer;
-}
+    .login-container input[type='submit'] {
+      border: none;
+      color: white;
+      background-color: #007bff;
+      cursor: pointer;
+    }
 
-.login-container input[type='submit']:hover {
-  background-color: #0056b3;
-}
-</style>
+    .login-container input[type='submit']:hover {
+      background-color: #0056b3;
+    }
+
+    .emoji {
+      font-size: 24px;
+      background: none;
+      cursor: pointer;
+      border: none;
+    }
+
+    .popup {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .close {
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
 <div class="login-container">
   <h2>LOG IN</h2>
-  <form action="javascript:void(0);" id="loginForm">
+  <form id="loginForm">
     <input type="email" id="email" name="email" placeholder="Email" required>
     <input type="password" id="password" name="password" placeholder="Password" required>
     <input type="submit" value="JOIN">
   </form>
 </div>
 
+<div class="mood-selection">
+  <h2>How are you feeling today?</h2>
+  <div class="emojis">
+    <button class="emoji" data-mood="happy">😊</button>
+    <button class="emoji" data-mood="sad">😢</button>
+    <button class="emoji" data-mood="anxious">😰</button>
+    <button class="emoji" data-mood="neutral">😐</button>
+  </div>
+</div>
+
+<div id="popup" class="popup hidden">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <p id="suggestionText"></p>
+  </div>
+</div>
+
 <script>
-// JavaScript functionality here
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    if(email === 'user@example.com' && password === 'password123') {
+      alert('Login successful. Welcome!');
+    } else {
+      alert('Login failed. Please check your email and password.');
+    }
+  });
+
+  document.querySelectorAll('.emoji').forEach(item => {
+    item.addEventListener('click', event => {
+      const mood
+        = item.getAttribute('data-mood');
+      document.getElementById('suggestionText').textContent = `You're feeling ${mood} today.`;
+      document.getElementById('popup').style.display = 'flex';
+    });
+  });
+
+  document.querySelector('.close').addEventListener('click', () => {
+    document.getElementById('popup').style.display = 'none';
+  });
 </script>
 
 </body>
